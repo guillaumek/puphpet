@@ -6,7 +6,7 @@ vm:
             project_id: ~
             client_email: ~
             key_location: ~
-            machine-type: ~
+            machine_type: ~
             image: ~
             name: ~
             tags: ~
