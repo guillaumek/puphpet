@@ -13,15 +13,15 @@ Vagrant.configure('2') do |config|
   config.vm.box      = 'gce'
   config.vm.hostname = "#{data['vm']['hostname']}"
 
-  config.vm.provider :rackspace do |rs, override|
-    google.google_project_id      = "#{data['vm']['provider']['google']['project_id']}"
-    google.google_client_email    = "#{data['vm']['provider']['google']['client_email']}"
-    google.google_key_location    = "#{data['vm']['provider']['google']['key_location']}"
-    google.machine_type           = "#{data['vm']['provider']['google']['machine_type']}"
-    google.image                  = "#{data['vm']['provider']['google']['image']}"
-    google.zone                   = "#{data['vm']['provider']['google']['zone']}"
-    google.name                   = "#{data['vm']['provider']['google']['name']}"
-    google.tags                   = data['vm']['provider']['google']['tags']
+  config.vm.provider :google do |google, override|
+    google.google_project_id      = "#{data['vm']['provider']['gce']['project_id']}"
+    google.google_client_email    = "#{data['vm']['provider']['gce']['client_email']}"
+    google.google_key_location    = "#{data['vm']['provider']['gce']['key_location']}"
+    google.machine_type           = "#{data['vm']['provider']['gce']['machine_type']}"
+    google.image                  = "#{data['vm']['provider']['gce']['image']}"
+    google.zone                   = "#{data['vm']['provider']['gce']['zone']}"
+    google.name                   = "#{data['vm']['provider']['gce']['name']}"
+    google.tags                   = data['vm']['provider']['gce']['tags']
 
     override.ssh.username         = "#{data['ssh']['username']}"
     override.ssh.private_key_path = "#{data['ssh']['private_key_path']}"
@@ -89,3 +89,4 @@ Vagrant.configure('2') do |config|
   end
 
 end
+
