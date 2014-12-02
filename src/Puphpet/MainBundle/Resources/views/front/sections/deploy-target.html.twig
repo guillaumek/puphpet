@@ -13,20 +13,20 @@
             </a>
         </li>
         <li class="col-xs-2">
-            <a href="#vagrantfile-digitalocean-tab" data-toggle="tab">
-                <div class="tab-icon">
-                    <img src="{{ asset('assets/v4/img/vendors/digitalocean-active.png') }}" class="tab-icon-active" />
-                    <img src="{{ asset('assets/v4/img/vendors/digitalocean-inactive.png') }}" class="tab-icon-inactive" />
-                    Digital Ocean
-                </div>
-            </a>
-        </li>
-        <li class="col-xs-2">
             <a href="#vagrantfile-rackspace-tab" data-toggle="tab">
                 <div class="tab-icon">
                     <img src="{{ asset('assets/v4/img/vendors/rackspace-active.png') }}" class="tab-icon-active" />
                     <img src="{{ asset('assets/v4/img/vendors/rackspace-inactive.png') }}" class="tab-icon-inactive" />
                     Rackspace
+                </div>
+            </a>
+        </li>
+        <li class="col-xs-2">
+            <a href="#vagrantfile-linode-tab" data-toggle="tab">
+                <div class="tab-icon">
+                    <img src="{{ asset('assets/v4/img/vendors/linode-active.png') }}" class="tab-icon-active" />
+                    <img src="{{ asset('assets/v4/img/vendors/linode-inactive.png') }}" class="tab-icon-inactive" />
+                    Linode
                 </div>
             </a>
         </li>
@@ -40,11 +40,11 @@
             </a>
         </li>
         <li class="col-xs-2">
-            <a href="#vagrantfile-linode-tab" data-toggle="tab">
+            <a href="#vagrantfile-digitalocean-tab" data-toggle="tab">
                 <div class="tab-icon">
-                    <img src="/assets/v4/img/vendors/linode-active.png" class="tab-icon-active" />
-                    <img src="/assets/v4/img/vendors/linode-inactive.png" class="tab-icon-inactive" />
-                    Linode
+                    <img src="{{ asset('assets/v4/img/vendors/digitalocean-active.png') }}" class="tab-icon-active" />
+                    <img src="{{ asset('assets/v4/img/vendors/digitalocean-inactive.png') }}" class="tab-icon-inactive" />
+                    Digital Ocean
                 </div>
             </a>
         </li>
@@ -55,20 +55,20 @@
             {% set extension = extensionManager.getExtensionBySlug('vagrantfile-local') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
-        <div class="tab-pane" id="vagrantfile-digitalocean-tab">
-            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-digital_ocean') %}
-            {{ extension.renderFront(extension.data)|raw }}
-        </div>
         <div class="tab-pane" id="vagrantfile-rackspace-tab">
             {% set extension = extensionManager.getExtensionBySlug('vagrantfile-rackspace') %}
+            {{ extension.renderFront(extension.data)|raw }}
+        </div>
+        <div class="tab-pane" id="vagrantfile-linode-tab">
+            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-linode') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
         <div class="tab-pane" id="vagrantfile-aws-tab">
             {% set extension = extensionManager.getExtensionBySlug('vagrantfile-aws') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
-        <div class="tab-pane" id="vagrantfile-linode-tab">
-            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-linode') %}
+        <div class="tab-pane" id="vagrantfile-digitalocean-tab">
+            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-digital_ocean') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
     </div>
