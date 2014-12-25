@@ -22,20 +22,29 @@
             </a>
         </li>
         <li class="col-xs-2">
-            <a href="#vagrantfile-aws-tab" data-toggle="tab">
-                <div class="tab-icon">
-                    <img src="{{ asset('assets/v4/img/vendors/aws-active.png') }}" class="tab-icon-active" />
-                    <img src="{{ asset('assets/v4/img/vendors/aws-inactive.png') }}" class="tab-icon-inactive" />
-                    Amazon Web Service
-                </div>
-            </a>
-        </li>
-        <li class="col-xs-2">
             <a href="#vagrantfile-linode-tab" data-toggle="tab">
                 <div class="tab-icon">
                     <img src="/assets/v4/img/vendors/linode-active.png" class="tab-icon-active" />
                     <img src="/assets/v4/img/vendors/linode-inactive.png" class="tab-icon-inactive" />
                     Linode
+                </div>
+            </a>
+        </li>
+        <li class="col-xs-2">
+            <a href="#vagrantfile-softlayer-tab" data-toggle="tab">
+                <div class="tab-icon">
+                    <img src="/assets/v4/img/vendors/softlayer-active.png" class="tab-icon-active" />
+                    <img src="/assets/v4/img/vendors/softlayer-inactive.png" class="tab-icon-inactive" />
+                    Softlayer
+                </div>
+            </a>
+        </li>
+        <li class="col-xs-2">
+            <a href="#vagrantfile-aws-tab" data-toggle="tab">
+                <div class="tab-icon">
+                    <img src="{{ asset('assets/v4/img/vendors/aws-active.png') }}" class="tab-icon-active" />
+                    <img src="{{ asset('assets/v4/img/vendors/aws-inactive.png') }}" class="tab-icon-inactive" />
+                    Amazon Web Service
                 </div>
             </a>
         </li>
@@ -59,12 +68,16 @@
             {% set extension = extensionManager.getExtensionBySlug('vagrantfile-rackspace') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
-        <div class="tab-pane" id="vagrantfile-aws-tab">
-            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-aws') %}
-            {{ extension.renderFront(extension.data)|raw }}
-        </div>
         <div class="tab-pane" id="vagrantfile-linode-tab">
             {% set extension = extensionManager.getExtensionBySlug('vagrantfile-linode') %}
+            {{ extension.renderFront(extension.data)|raw }}
+        </div>
+        <div class="tab-pane" id="vagrantfile-softlayer-tab">
+            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-softlayer') %}
+            {{ extension.renderFront(extension.data)|raw }}
+        </div>
+        <div class="tab-pane" id="vagrantfile-aws-tab">
+            {% set extension = extensionManager.getExtensionBySlug('vagrantfile-aws') %}
             {{ extension.renderFront(extension.data)|raw }}
         </div>
         <div class="tab-pane" id="vagrantfile-gce-tab">
@@ -74,6 +87,6 @@
     </div>
 
     <ul class="pager">
-        <li class="next"><a href="#server">Server Packages →</a></li>
+        <li class="next"><a href="#system">System →</a></li>
     </ul>
 </div>

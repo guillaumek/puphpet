@@ -17,12 +17,15 @@ class AppKernel extends Kernel
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
 
             new Puphpet\Extension\VagrantfileLocalBundle\PuphpetExtensionVagrantfileLocalBundle(),
-            new Puphpet\Extension\VagrantfileLinodeBundle\PuphpetExtensionVagrantfileLinodeBundle(),
-            new Puphpet\Extension\VagrantfileDigitalOceanBundle\PuphpetExtensionVagrantfileDigitalOceanBundle(),
             new Puphpet\Extension\VagrantfileRackspaceBundle\PuphpetExtensionVagrantfileRackspaceBundle(),
+            new Puphpet\Extension\VagrantfileLinodeBundle\PuphpetExtensionVagrantfileLinodeBundle(),
+            new Puphpet\Extension\VagrantfileSoftlayerBundle\PuphpetExtensionVagrantfileSoftlayerBundle(),
             new Puphpet\Extension\VagrantfileAwsBundle\PuphpetExtensionVagrantfileAwsBundle(),
             new Puphpet\Extension\VagrantfileGceBundle\PuphpetExtensionVagrantfileGceBundle(),
-            new Puphpet\Extension\ServerBundle\PuphpetExtensionServerBundle(),
+            new Puphpet\Extension\VagrantfileDigitalOceanBundle\PuphpetExtensionVagrantfileDigitalOceanBundle(),
+            new Puphpet\Extension\PackageBundle\PuphpetExtensionPackageBundle(),
+            new Puphpet\Extension\UserGroupBundle\PuphpetExtensionUserGroupBundle(),
+            new Puphpet\Extension\CronBundle\PuphpetExtensionCronBundle(),
             new Puphpet\Extension\ApacheBundle\PuphpetExtensionApacheBundle(),
             new Puphpet\Extension\NginxBundle\PuphpetExtensionNginxBundle(),
             new Puphpet\Extension\PhpBundle\PuphpetExtensionPhpBundle(),
@@ -45,6 +48,7 @@ class AppKernel extends Kernel
             new Puphpet\Extension\RubyBundle\PuphpetExtensionRubyBundle(),
             new Puphpet\Extension\NodeJsBundle\PuphpetExtensionNodeJsBundle(),
             new Puphpet\Extension\PythonBundle\PuphpetExtensionPythonBundle(),
+            new Puphpet\Extension\SolrBundle\PuphpetExtensionSolrBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

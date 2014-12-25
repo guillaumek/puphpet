@@ -11,13 +11,16 @@ services:
         calls:
         # vagrantfile
             - [ addExtension, [ @puphpet.extension.vagrantfile.local.configure ] ]
-            - [ addExtension, [ @puphpet.extension.vagrantfile.digital_ocean.configure ] ]
-            - [ addExtension, [ @puphpet.extension.vagrantfile.linode.configure ] ]
             - [ addExtension, [ @puphpet.extension.vagrantfile.rackspace.configure ] ]
+            - [ addExtension, [ @puphpet.extension.vagrantfile.linode.configure ] ]
+            - [ addExtension, [ @puphpet.extension.vagrantfile.softlayer.configure ] ]
             - [ addExtension, [ @puphpet.extension.vagrantfile.aws.configure ] ]
             - [ addExtension, [ @puphpet.extension.vagrantfile.gce.configure ] ]
-        # server
-            - [ addExtension, [ @puphpet.extension.server.configure ] ]
+            - [ addExtension, [ @puphpet.extension.vagrantfile.digital_ocean.configure ] ]
+        # system
+            - [ addExtension, [ @puphpet.extension.package.configure ] ]
+            - [ addExtension, [ @puphpet.extension.user_group.configure ] ]
+            - [ addExtension, [ @puphpet.extension.cron.configure ] ]
         # firewall
             - [ addExtension, [ @puphpet.extension.firewall.configure ] ]
         # webservers
@@ -45,6 +48,7 @@ services:
             - [ addExtension, [ @puphpet.extension.beanstalkd.configure ] ]
             - [ addExtension, [ @puphpet.extension.rabbitmq.configure ] ]
             - [ addExtension, [ @puphpet.extension.elastic_search.configure ] ]
+            - [ addExtension, [ @puphpet.extension.solr.configure ] ]
 
     puphpet.twig.base_extension:
         class: Puphpet\MainBundle\Twig\BaseExtension

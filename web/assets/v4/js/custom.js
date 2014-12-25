@@ -69,9 +69,6 @@ PUPHPET.updateOtherInput = function() {
 
                 $target.prop('checked', checked);
 
-                console.log("VALUE IS " + value)
-                console.log("CHECKED IS " + checked)
-
                 return true;
             }
 
@@ -130,6 +127,144 @@ PUPHPET.updateOtherInputSelect = function() {
 
                 $target.val(value);
             });
+        });
+    });
+};
+
+/**
+ * Identical to updateOtherInput(), but only runs for checkboxes,
+ * to be used with updateOtherInputOnUncheck()
+ *
+ * When element is checked, changes value of target
+ */
+PUPHPET.updateOtherInputOnCheck = function() {
+    $(document).on('click', '.update-other-input-on-check', function(e){
+        var $parent = $(this);
+
+        if (!$parent.is(':checked')) {
+            return true;
+        }
+
+        $.each($(this).data(), function(key, value) {
+            // jQuery changed "data-foo-bar" to "dataFooBar". Change them back.
+            key = key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+
+            // Only work with data attributes that have "update-on-check-"
+            if (key.search('update-on-check-') !== 0) {
+                return true;
+            }
+
+            key = key.replace('update-on-check-', '');
+
+            var $target = $('#' + key);
+
+            // If target element is not defined as #foo, maybe it is an input,name,value target
+            if (!$target.length) {
+                var selector = 'input[name="' + key + '"]';
+
+                if (value.length) {
+                    selector = selector + '[value="'+ value +'"]'
+                }
+
+                $target = $(selector)
+            }
+
+            /**
+             * If target is checkbox element, check if clicked element was checked or unchecked.
+             */
+            if ($target.is(':checkbox')) {
+                var checked;
+
+                // Element gets checked, wants target to be checked
+                if (value && $parent.is(':checked')) {
+                    checked = true;
+                }
+                // Element gets checked, wants target to be unchecked
+                else if (!value && $parent.is(':checked')) {
+                    checked = false;
+                }
+                // Element gets unchecked
+                else {
+                    return 1;
+                }
+
+                $target.prop('checked', checked);
+
+                return true;
+            }
+
+            if (!$target.is(':radio') && !$target.is(':checkbox')) {
+                $target.val(value);
+            }
+        });
+    });
+};
+
+/**
+ * Identical to updateOtherInput(), but only runs for checkboxes,
+ * to be used with updateOtherInputOnCheck()
+ *
+ * When element is unchecked, changes value of target
+ */
+PUPHPET.updateOtherInputOnUncheck = function() {
+    $(document).on('click', '.update-other-input-on-uncheck', function(e){
+        var $parent = $(this);
+
+        if ($parent.is(':checked')) {
+            return true;
+        }
+
+        $.each($(this).data(), function(key, value) {
+            // jQuery changed "data-foo-bar" to "dataFooBar". Change them back.
+            key = key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+
+            // Only work with data attributes that have "update-on-uncheck-"
+            if (key.search('update-on-uncheck-') !== 0) {
+                return true;
+            }
+
+            key = key.replace('update-on-uncheck-', '');
+
+            var $target = $('#' + key);
+
+            // If target element is not defined as #foo, maybe it is an input,name,value target
+            if (!$target.length) {
+                var selector = 'input[name="' + key + '"]';
+
+                if (value.length) {
+                    selector = selector + '[value="'+ value +'"]'
+                }
+
+                $target = $(selector)
+            }
+
+            /**
+             * If target is checkbox element, check if clicked element was checked or unchecked.
+             */
+            if ($target.is(':checkbox')) {
+                var checked;
+
+                // Element gets unchecked, wants target to be checked
+                if (value && !$parent.is(':checked')) {
+                    checked = true;
+                }
+                // Element gets unchecked, wants target to be unchecked
+                else if (!value && !$parent.is(':checked')) {
+                    checked = false;
+                }
+                // Element gets unchecked
+                else {
+                    return 1;
+                }
+
+                $target.prop('checked', checked);
+
+                return true;
+            }
+
+            if (!$target.is(':radio') && !$target.is(':checkbox')) {
+                $target.val(value);
+            }
         });
     });
 };
@@ -650,12 +785,19 @@ PUPHPET.configureCollapseable = function() {
 
 PUPHPET.hideOnNotInstalled = function () {
     $(document).on('change', '.install-checkbox', function(e) {
-        var target = this.getAttribute('data-hide-on-uncheck');
+        var hideTarget = this.getAttribute('data-hide-on-uncheck');
+        var showTarget = this.getAttribute('data-show-on-uncheck');
 
         if ($(this).is(':checked')) {
-            $(target).removeClass('hidden');
+            $(hideTarget).removeClass('hidden');
+            if(showTarget) {
+                $(showTarget).addClass('hidden');    
+            }
         } else {
-            $(target).addClass('hidden');
+            $(hideTarget).addClass('hidden');
+            if(showTarget) {
+                $(showTarget).removeClass('hidden');
+            }
         }
     });
 };
@@ -688,9 +830,36 @@ PUPHPET.scrollTo = function() {
     });
 };
 
+PUPHPET.disableEnterSubmit = function() {
+    $('input,select').keypress(function(event) {
+        if(event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
+};
+
+/**
+ * Element's values are updated as target is updated. Only for input type=text
+ */
+PUPHPET.mirrorValue = function() {
+    $('.mirror-value').each(function() {
+        var $target    = $(this);
+        var sourceName = $(this)[0].getAttribute('data-mirror-value');
+
+        console.log(sourceName);
+
+        $(document).on('change', sourceName, function(e) {
+            console.log('aaaa');
+            $target.val($(sourceName).val());
+        });
+    });
+};
+
 $(document).ready(function() {
     PUPHPET.updateOtherInput();
     PUPHPET.updateOtherInputSelect();
+    PUPHPET.updateOtherInputOnCheck();
+    PUPHPET.updateOtherInputOnUncheck();
     PUPHPET.runSelectize(null);
     PUPHPET.selectizeAddClickedToElement();
     PUPHPET.addRepeatableElement();
@@ -707,4 +876,6 @@ $(document).ready(function() {
     PUPHPET.hideOnNotInstalled();
     PUPHPET.submitUncheckedCheckboxes();
     PUPHPET.scrollTo();
+    PUPHPET.disableEnterSubmit();
+    PUPHPET.mirrorValue();
 });
