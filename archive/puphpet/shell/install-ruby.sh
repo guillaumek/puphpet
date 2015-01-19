@@ -59,10 +59,12 @@ rm -rf /usr/local/rvm/rubies/ruby-1.9.3-p*
 if [ "${OS}" == 'debian' ] || [ "${OS}" == 'ubuntu' ]; then
     gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
 elif [[ "${OS}" == 'centos' ]]; then
-    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+    #gpg2 --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+    curl -sSL https://rvm.io/mpapis.asc | gpg --import -
 fi
 
 curl -sSL https://get.rvm.io | bash -s stable --quiet-curl --ruby=1.9.3
+
 source /usr/local/rvm/scripts/rvm
 
 if [[ -f '/usr/bin/ruby' ]]; then
